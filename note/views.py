@@ -154,16 +154,16 @@ def summary(request, article_id):
 
 
 def article_view(request, article_id):
-    #if request.GET.get('from_combined_screen') != 'true':
-        #return redirect(reverse('note:combined'))
+    if request.GET.get('from_combined_screen') != 'true':
+        return redirect(reverse('note:combined'))
     article = get_object_or_404(Article, id=article_id)
     highlights = Highlight.objects.filter(article=article).values_list('id', 'content')
     highlights_json = json.dumps(list(highlights))
     return render(request, 'note/article.html', {'article': article, 'highlights_json': highlights_json})
 
 def notes_view(request, article_id):
-    #if request.GET.get('from_combined_screen') != 'true':
-        #return redirect(reverse('note:combined'))
+    if request.GET.get('from_combined_screen') != 'true':
+        return redirect(reverse('note:combined'))
     notes = Note.objects.filter(article_id=article_id)
     return render(request, 'note/notes_taking.html', {'notes' : notes, 'article_id': article_id})
 

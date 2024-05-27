@@ -63,6 +63,7 @@ $(document).ready(function () {
                 if (data && data.msg && data.msg == 'save') {
                     highlightId = data.highlightId;
                     saveNewNote(title, text, highlightId);
+                    window.removeEventListener('message', arguments.callee);
                 }
             }, false);
         }
