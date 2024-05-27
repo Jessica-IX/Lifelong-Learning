@@ -3,10 +3,9 @@ $(document).ready(function () {
     var deletionOn = false;
     let new_hightlight_note = true;
     var preElement = document.querySelector('pre');
-    var articleDataDiv = $('#article-data');
-    var articleId = articleDataDiv.data('article-id');
-    var mainURL = 'http://127.0.0.1:8000/note/' + articleId + '/';
+    let articleId = $('#article').data('article-id');
 
+    var mainURL = 'http://127.0.0.1:8000/note/' + articleId + '/';
     //localStorage.clear();
 
     let savedContent = localStorage.getItem(`preContent_${articleId}`);
