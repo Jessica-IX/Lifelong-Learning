@@ -2,7 +2,7 @@ $(document).ready(function () {
     var articleId = $('#article-data').data('article-id');
     var mainURL = 'http://127.0.0.1:8000/note/' + articleId + '/';
 
-    $(document).on('click', '#close[monitor="true"]', function() {
+    /*$(document).on('click', '#close[monitor="true"]', function() {
         var data = {
             origin: 'note',
             action: 'no_add'
@@ -10,6 +10,18 @@ $(document).ready(function () {
         window.parent.postMessage(data, mainURL);
         $('#new-title').val('');
         $('#new-text').val('');
+    });*/
+    $(document).on('click', '#close', function() {
+        $('#new-title').val('');
+        $('#new-text').val('');
+        var monitorValue = $(this).attr('monitor');
+        if (monitorValue === 'true') {
+            var data = {
+                origin: 'note',
+                action: 'no_add'
+            };
+            window.parent.postMessage(data, mainURL);
+        }
     });
     
     $(document).on('click', '#save[monitor="true"]', function() {
