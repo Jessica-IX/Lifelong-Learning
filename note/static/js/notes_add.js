@@ -88,6 +88,9 @@ $(document).ready(function () {
                     var $editBtn = $('button[data-note-id="' + noteId + '"].edit-btn');
                     $editBtn.removeClass('active');
                     $editBtn.attr('style', 'display: block !important; background-color:  #002664 !important; color: white !important; border: 2px solid #002664 !important;');
+                    var $saveBtn = $('button[data-note-id="' + noteId + '"].save-btn');
+                    $saveBtn.css('visibility', 'hidden');
+                    $noteContainer.find('textarea').prop('readonly', true);
                 } else {
                     $('#notes-list').html(response.updated_html);
                 }

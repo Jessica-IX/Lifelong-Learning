@@ -89,11 +89,6 @@ $(document).ready(function () {
                 $card.find('textarea').prop('readonly', false);
             }
 
-        } else if ($button.closest('.save-btn').length) {
-            editClickable = true;
-            $button.css('visibility', 'hidden');
-            var $card = $(this).closest('.card');
-            $card.find('textarea').prop('readonly', true);
-        } 
+        }
     });
 });
