@@ -1,0 +1,45 @@
+<tr  data-user-id="{{ user.id }}">
+    <td>{{ user.id }}</td>
+    <td>
+        <input type="text" data-user-id="{{ user.id }}" name="name" class="user-name no-focus" value="{{ user.name }}" readonly>
+    </td>
+    <td>
+        <input type="text" data-user-id="{{ user.id }}" class="age no-focus" name="age" value="{{ user.age }}" readonly>
+    </td>
+    <td> 
+        <div id="liked-books-container">
+            <ul data-user-id="{{ user.id }}">
+                {% for user_liked_book in user.userlikedbook_set.all %}
+                <div id="-user-{{ user.id }}-book-{{ user_liked_book.book.id }}" class="d-flex justify-content-between" data-book-id="{{ user_liked_book.book.id }}">
+                    <li id="user-{{ user.id }}-book-{{ user_liked_book.book.id }}">
+                        [{{ user_liked_book.book.id }}] {{ user_liked_book.book.name }}
+                    </li>
+                    <button type="button" class="btn ms-2 d-none delete-btn btn-xs liked-delete" data-user-id="{{ user.id }}" data-book-id="{{ user_liked_book.book.id }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                {% endfor %}
+            </ul>
+            <div class="d-flex flex-column d-none liked-list" data-user-id="{{ user.id }}">
+                <select multiple class="form-select">
+                    {% for book in all_books %}
+                        <option value="{{ book.id }}">[{{ book.id }}] {{ book.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="btn liked-save ms-2 btn-xs align-self-end" data-user-id="{{ user.id }}">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </td>
+    <td>    
+        <button type="button" class="btn btn-primary edit-btn btn-sm user-edit" data-user-id="{{ user.id }}">
+            <i class="fas fa-edit"></i>
+        </button>
+    </td>
+    <td>    
+        <button type="button" class="btn btn-primary ms-2 delete-btn btn-sm user-delete" data-user-id="{{ user.id }}">
+            <i class="fas fa-trash"></i>
+        </button>
+    </td>
+</tr>

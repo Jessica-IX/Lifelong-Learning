@@ -1,0 +1,80 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+pre {
+    font-family: inherit;
+    font-size: 1.1rem;
+}
+
+h2, pre {
+    margin: 30px 0;
+    width: 100%;
+}
+
+.navbar {
+    padding: 5px 0;
+    height: 50px;
+}
+
+.content {
+    margin-top: 60px;
+}
+
+mark {
+    padding: 0;
+    background-color: rgba(255, 242, 4, 0.823);
+}
+
+#highlight-button {
+    color: rgb(255, 242, 4);
+    background-color: black;
+}
+
+#highlight-button:hover {
+    background-color: rgb(248, 240, 83);
+}
+
+#erase-button {
+    color: rgb(255, 4, 4);
+}
+
+#erase-button:hover {
+    background-color: rgba(255, 4, 4, 0.916);
+    color: black;
+}
+
+#highlight-button:hover, #erase-button:hover {
+    color: black;
+}
+
+.nav-container button {
+    margin-right: 20px;
+}
+
+.btn {
+    font-weight: bold!important;
+}
+
+.dropdown-menu {
+    position: fixed;
+}
+
+.dropdown-item {
+    text-align: center;
+    padding: 0 4px;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(185, 253, 117, 0.823);
+}
+
+[data-is-note="true"] {
+    background-color: rgba(185, 253, 117, 0.823);
+}
+
+#highlight-only {
+    border-bottom: 2px solid  rgb(0, 0, 0);
+}

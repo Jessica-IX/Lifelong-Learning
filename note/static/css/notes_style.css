@@ -1,0 +1,127 @@
+@font-face {
+    font-family: "Switzer";
+    src: url('../fonts/Switzer-Regular.woff2') format('woff2'),
+         url('../fonts/Switzer-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: transparent!important;
+}
+
+
+.container {
+    height: 100%;
+    width: 95%;
+    margin: 0;
+}
+
+.modal-backdrop {
+    display: none;
+}
+
+.modal-footer {
+    height: 80%;
+}
+
+.modal {
+    width: 90%;
+}
+
+.card-header {
+    height: 50px;
+    align-items: stretch;
+    flex: 0 1 auto; 
+}
+
+.alert-heading {
+    display: inline;
+}
+
+
+.card {
+    margin-top: 5px;
+    margin-bottom: 25px;
+    width: 95%;
+    height: 1000px;
+}
+
+.card:hover {
+    box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.541);
+}
+
+.card-content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.save-btn {
+    margin-left:auto!important;
+    margin-bottom: 0;
+    visibility: hidden;
+}
+
+textarea {
+    height: auto;
+    resize: none;
+    overflow: visible;
+}
+.card-header textarea {
+    width: 95%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    white-space: nowrap;
+}
+
+textarea:focus {
+    border: none;
+    outline: none;
+}
+
+.edit-border {
+    display: inline;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #002664!important;
+    border: #002664!important;
+    height:100%;
+}
+
+.btn-primary:focus {
+    background-color:white!important;
+    color: #002664!important;
+    border: 2px solid #002664!important;
+}
+
+.btn-primary:hover {
+    background-color: white!important;
+    color: #002664!important;
+    border: 2px solid #002664!important;
+}
+
+.note-text {
+    height: 5em;
+    overflow: hidden;
+    transition: height 0.5s ease;
+}
+
+.note-text.expanded {
+    height: auto;
+    overflow: visible;
+}
+
+.edit-btn {
+    display: none!important;
+}

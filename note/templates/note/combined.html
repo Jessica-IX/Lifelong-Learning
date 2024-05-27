@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Note Taking{% endblock %}
+
+{% block other_files %}
+    <link rel="stylesheet" href="{% static 'css/combined_style.css' %}">
+    <script src="{% static 'js/note_main.js' %}" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+
+{% block content %}
+    <a id="back-button" href="{% url 'note:article_gallery' %}" class="btn custom-btn mb-3">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+    <h2 class="article_title font-italic font-weight-bold"> Article</h2>
+    <h2 class="notes_title"> Notes</h2>
+    <iframe class="article" src="{% url 'note:article_view' id %}?from_combined_screen=true"></iframe>
+    <iframe class="notes" src="{%  url 'note:notes_view' id %}?from_combined_screen=true"></iframe>
+{% endblock%}
+

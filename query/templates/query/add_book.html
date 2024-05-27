@@ -1,0 +1,19 @@
+<tr  data-book-id="{{ book.id }}">
+    <td>{{ book.id }}</td>
+    <td>
+        <input type="text" data-book-id="{{ book.id }}" class="book-name" name="name" value="{{ book.name }}" readonly>
+    </td>
+    <td>
+        <input type="text" data-book-id="{{ book.id }}" class="price" name="price" value="{{ book.price }}" readonly>
+    </td>
+    <td>    
+        <button type="button" class="btn btn-primary edit-btn btn-sm book-edit" data-book-id="{{ book.id }}">
+            <i class="fas fa-edit"></i>
+        </button>
+    </td>
+    <td>    
+        <button type="button" class="btn btn-primary ms-2 delete-btn btn-sm book-delete" data-book-id="{{ book.id }}">
+            <i class="fas fa-trash"></i>
+        </button>
+    </td>
+</tr>

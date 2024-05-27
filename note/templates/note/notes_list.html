@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_files %}
+    <script src="{% static 'js/notes_mod.js' %}" defer></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="article-data" data-article-id="{{ article_id }}"></div>
+    {% for note in notes %}
+    <div class="col-md-11">
+        <div class="card small d-flex justify-content-start" data-note-id="{{ note.id }}">
+            {% if note.highlight %}
+            <div class='sp' data-note-id="{{ note.id }}" data-highlight-id="{{ note.highlight.id }}"></div>
+            {% endif %}
+            <div class="card-header d-flex justify-content-between">
+                <textarea maxlength="45" data-note-id="{{ note.id }}" readonly class="note-title edit-text edit-border" rows="3">{{ note.title }}</textarea>
+                <div  class="buttons d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary edit-btn btn-sm" data-note-id="{{ note.id }}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary ms-2 delete-btn btn-sm" data-note-id="{{ note.id }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="btn btn-primary ms-2 toggle-btn" type="button" data-note-id="{{ note.id }}">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-content">
+                <textarea readonly class="note-text edit-text edit-border" rows="3">{{ note.text }}</textarea>
+                <button type="button" class="btn btn-primary save-btn btn-sm" data-note-id="{{ note.id }}">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.toggle-btn').off('click').on('click', function() {
+                var noteId = $(this).data('note-id');
+                var textarea = $('[data-note-id="' + noteId + '"]').closest('.card').find('.note-text');
+                var editBtn = $('[data-note-id="' + noteId + '"]').closest('.card').find('.edit-btn');
+                if (textarea.hasClass('expanded')) {
+                    textarea.removeClass('expanded');
+                    textarea.css('height', '5em');
+                    editBtn.attr('style', 'display: none !important');
+                    var saveBtn = $('[data-note-id="' + noteId + '"]').closest('.card').find('.save-btn');
+                    saveBtn.css('visibility', 'hidden');
+                } else {
+                    textarea.addClass('expanded');
+                    textarea.css('height', textarea[0].scrollHeight + 'px');
+                    editBtn.attr('style', 'display: block !important');
+                }
+            });
+        });
+    </script>
+    {% endfor %}
+{% endblock%}

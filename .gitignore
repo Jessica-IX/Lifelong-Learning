@@ -1,0 +1,5 @@
+__pycache__/
+*/migrations/
+**/.DS_Store
+db.sqlite3
+note/model_cache/

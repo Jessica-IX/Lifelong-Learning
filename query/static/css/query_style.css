@@ -1,0 +1,61 @@
+body {
+    width: 80%;
+    margin: auto;
+    border-left: 2px rgb(204, 204, 204) solid;
+    border-right: 2px rgb(204, 204, 204) solid;
+    min-height: 100vh;
+}
+.search {
+    background-color: rgba(204, 204, 204, 0.403);
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.form-control {
+    width: 65px;
+    text-align: center;
+}
+
+input {
+    height: 70%;
+}
+
+#age_min_value,
+#age_max_value {
+    width: 70px;
+}
+
+#price_min_value,
+#price_max_value {
+    width: 100px;
+}
+
+.mb-3 {
+    text-align: center;
+}
+
+.search-btn {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+input, label {
+    margin: 0 5px;
+}
+
+#book_name {
+    width: 180px;
+}
+
+.books {
+    margin-bottom: 50px;
+}
+
+#name {
+    width: 100px;
+}
+
+.users-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

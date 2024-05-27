@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Note Taking{% endblock %}
+{% block other_files %}
+    <link rel="stylesheet" href="{% static 'css/notes_style.css' %}">
+    <script src="{% static 'js/notes_add.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div id="article-data" data-article-id="{{ article_id }}"></div>
+    <div class="text-end">
+        <button type="button" class="btn btn-primary btn-sm btn-add" id="miBoton">
+            <i class="fas fa-plus">    </i> Add Note
+        </button>
+    </div>
+    <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <input class="edit-border " type="text" id="new-title" placeholder="Enter title" aria-label="Modal title">
+            <button id='close' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control edit-border " id="new-text" rows="4" placeholder="Enter text"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id='save' type="button" class="btn btn-primary ms-2 save-new btn-sm" data-note-id="{{ note.id }}">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center" id="notes-list">
+            {% include 'note/notes_list.html' %}
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#miBoton").click(function() {
+                $("#miModal").modal('show');
+            });
+            $('#miModal').modal({
+                backdrop: 'static',
+                keyboard: false
+              });
+        });
+        
+    </script>
+
+{% endblock%}

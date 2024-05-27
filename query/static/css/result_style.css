@@ -1,0 +1,63 @@
+.back {
+    margin: 20px;
+}
+
+.results {
+    display: inline-block;
+    text-align: center;
+    margin-top: 2%;
+    margin-left: 35%;
+}
+
+.user-name {
+    width: 150px;
+}
+
+.age {
+    width: 40px;
+}
+
+.price {
+    width: 100px;
+}
+
+.user-name, .age, .price, .book-name {
+    border: none;
+    background-color: transparent;
+}
+
+.div:where(.swal2-icon).swal2-warning {
+    border-color: #ff6a6a;
+    color: #ff6a6a;
+}
+
+button.swal2-confirm {
+    background-color: #0d6efd!important;
+}
+
+.swal2-popup {
+    width: 20em;
+}
+
+.swal2-icon-show {
+    margin-bottom: 0;
+    border-color: #ff6a6a!important;
+    color: #ff6a6a!important;
+}
+
+input.no-focus:focus {
+    outline: none;
+}
+
+.liked-save, .liked-delete {
+    border: 1px solid black;
+}
+
+.liked-delete {
+    right: 0;
+}
+
+.btn-xs {
+    padding: 2px 4px;
+}
+

@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_files %}
+<link rel="stylesheet" href="{% static 'css/result_style.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/search.js' %}" defer></script>
+
+{% endblock %}
+{% block content %}
+<div class="modal fade" id="user-modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <input type="text" id="new-user-name" placeholder="Enter name" aria-label="Modal name">
+                <input class="ms-2" type="number" id="new-age" placeholder="Enter age" aria-label="Modal age" min="0">
+                <button id="user-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">  
+                <p>Liked Books: <br> Hold down ctrl (windows) or command (Mac) to select multiple options</p>
+                <select multiple size="10" class="form-select" id="liked-books" aria-label="Liked books">
+                    {% for book in all_books %}
+                        <option value="{{ book.id }}">[{{ book.id }}] {{ book.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary ms-2 add-user btn-sm">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="book-modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <input type="text" id="new-book-name" placeholder="Enter Book Name">
+            <input class="ms-2" type="number" id="new-price" name="new-price" placeholder="Book Price" min="0" step="0.01">
+            <button type="button" id="book-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary ms-2 add-book btn-sm" data-note-id="{{ note.id }}">
+                <i class="fas fa-check"></i>
+            </button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<a id="back-button" href="{% url 'query:query_list' %}" class="btn btn-primary back mb-3">
+    <i class="fas fa-arrow-left"></i> Back
+</a>
+<h2 class="results">Results Found:</h2>
+{% if users or books %}
+    {% if users %}
+    <div class="container">       
+        <div class="head d-flex justify-content-between">
+            <h2>Users</h2>
+            <div class="text-end">
+                <button type="button" class="btn btn-primary btn-sm btn-add" id="add-user-btn">
+                    <i class="fas fa-plus">    </i> Add User
+                </button>
+            </div>
+        </div>
+        <table class="table table-hover">
+        <thead>
+            <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Liked Book Indice</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="users-container">
+            {% for user in users %}
+            <tr  data-user-id="{{ user.id }}">
+                <td>{{ user.id }}</td>
+                <td>
+                    <input type="text" data-user-id="{{ user.id }}" name="name" class="user-name no-focus" value="{{ user.name }}" readonly>
+                </td>
+                <td>
+                    <input type="text" data-user-id="{{ user.id }}" class="age no-focus" name="age" value="{{ user.age }}" readonly>
+                </td>
+                <td> 
+                    <div id="liked-books-container">
+                        <ul data-user-id="{{ user.id }}">
+                            {% for user_liked_book in user.userlikedbook_set.all|dictsort:'book.id' %}
+                            <div id="-user-{{ user.id }}-book-{{ user_liked_book.book.id }}" class="d-flex justify-content-between" data-book-id="{{ user_liked_book.book.id }}">
+                                <li id="user-{{ user.id }}-book-{{ user_liked_book.book.id }}">
+                                    [{{ user_liked_book.book.id }}] {{ user_liked_book.book.name }}
+                                </li>
+                                <button type="button" class="btn ms-2 d-none delete-btn btn-xs liked-delete" data-user-id="{{ user.id }}" data-book-id="{{ user_liked_book.book.id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </ul>
+                        <div class="d-flex flex-column d-none liked-list" data-user-id="{{ user.id }}">
+                            <select multiple class="form-select"  data-user-id="{{ user.id }}">
+                                {% for book in all_books %}
+                                    <option value="{{ book.id }}">[{{ book.id }}] {{ book.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="button" class="btn liked-save ms-2 btn-xs align-self-end" data-user-id="{{ user.id }}">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td>    
+                    <button type="button" class="btn btn-primary edit-btn btn-sm user-edit" data-user-id="{{ user.id }}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
+                <td>    
+                    <button type="button" class="btn btn-primary ms-2 delete-btn btn-sm user-delete" data-user-id="{{ user.id }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if books %}
+    <div class="container">       
+        <div class="head d-flex justify-content-between">
+            <h2>Books</h2>
+            <div class="text-end">
+                <button type="button" class="btn btn-primary btn-sm btn-add" id="add-book-btn">
+                    <i class="fas fa-plus">    </i> Add Book
+                </button>
+            </div>
+        </div>
+        <table class="table table-hover">
+        <thead>
+            <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Book Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="books-container">
+            {% for book in books %}
+            <tr  data-book-id="{{ book.id }}">
+                <td>{{ book.id }}</td>
+                <td>
+                    <input type="text" data-book-id="{{ book.id }}" class="book-name no-focus" name="name" value="{{ book.name }}" readonly>
+                </td>
+                <td>
+                    <input type="text" data-book-id="{{ book.id }}" class="price no-focus" name="price" value="{{ book.price }}" readonly>
+                </td>
+                <td>    
+                    <button type="button" class="btn btn-primary edit-btn btn-sm book-edit" data-book-id="{{ book.id }}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
+                <td>    
+                    <button type="button" class="btn btn-primary ms-2 delete-btn btn-sm book-delete" data-book-id="{{ book.id }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% endif %}
+{% endif %}
+{% endblock%}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_files %}
+    <link rel="stylesheet" href="{% static 'css/menu_style.css' %}">
+{% endblock %}
+{% block content %}
+<main class="site-content container d-flex flex-column align-items-center">
+    <h2>Articles</h2>
+    <div class="container">
+        <div class="documentation-links__inner">
+            <div class="row">
+                {% for article in articles %}
+                <div class="col">
+                    <div class="documentation-links__single">
+                        <a href="{% url 'note:combined' article.id %}" class="anchor-overlay">null</a>
+                        <div class="documentation-links__content">
+                            <h2>{{ article.title|truncatewords:10 }}</h2>
+                            <p>{{ article.content|truncatechars:120 }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock%}
